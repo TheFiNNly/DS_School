@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+
+<style>
+   select {
+    width: 1300px;
+    height: 40px
+   }
+    textarea {
+    width: 1300px;
+    height: 40px
+   }
+    button {
+    width: 150px;
+    height: 40px
+    }
+</style>
+
+<div class="container mt-5" >
+    <h1>Введите параметры квартиры</h1>
+    <form method="post">
+        <textarea name="log_price_doc" id="log_price_doc" class="form-control" placeholder="Ожидаемая стоимость"></textarea><br>
+        <textarea name="full_sq" id="full_sq" class="form-control" placeholder="Площадь квартиры"></textarea><br>
+        <textarea name="num_room" id="num_room" class="form-control" placeholder="Количество комнат"></textarea><br>
+        <select style="position: absolute; left: 310px; top: 440px;" type="text" id ="product_type_OwnerOccupier"
+                name="product_type_OwnerOccupier">
+            <option value="" disabled selected>Выберите тип жилья</option>
+            <option value="0">Первичка</option>
+            <option value="1">Вторичка</option>
+        </select><br>
+        <button style="position: absolute; left: 780px; top: 520px;" type="submit"> Предсказать </button>
+    </form>
+    {% for pred in predict_MO %}
+    <div style="position: absolute; left: 310px; top: 600px;">
+        <h3> Потенциальный район: {{pred}}</h3>
+    </div>
+    {% endfor %}
+    {% for pred in predict_district %}
+    <div style="position: absolute; left: 310px; top: 680px;">
+        <h3> Потенциальный округ: {{pred}}</h3>
+    </div>
+    {% endfor %}
+    <form action="district">
+        <button style="position: absolute; left: 980px; top: 520px;" type="submit">Очистить</button>
+    </form>
+</div>
+
+{% endblock %}

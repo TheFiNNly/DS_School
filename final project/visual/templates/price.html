@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+<style>
+   select {
+    width: 1300px;
+    height: 40px
+   }
+    textarea {
+    width: 1300px;
+    height: 40px
+   }
+    button {
+    width: 150px;
+    height: 40px
+    }
+</style>
+
+<div class="container mt-5" >
+    <h1>Введите параметры квартиры</h1>
+    <form method="post" action="/predict_price">
+        <textarea name="full_sq" id="full_sq" class="form-control" placeholder="Площадь квартиры"></textarea><br>
+        <textarea name="floor" id="floor" class="form-control" placeholder="Этаж"></textarea><br>
+        <textarea name="num_room" id="num_room" class="form-control" placeholder="Количество комнат"></textarea><br>
+        <textarea name="metro_min_avto" id="metro_min_avto" class="form-control" placeholder="Время до метро"></textarea><br>
+        <select type="text" id ="sub_area" name="sub_area">
+            <option value="" disabled selected>Выберите район</option>
+            <option value="СВАО">СВАО</option>
+            <option value="ЮАО">ЮАО</option>
+            <option value="ЮВАО">ЮВАО</option>
+            <option value="СЗАО">СЗАО</option>
+            <option value="ЦАО">ЦАО</option>
+            <option value="ВАО">ВАО</option>
+            <option value="САО">САО</option>
+            <option value="ЗАО">ЗАО</option>
+            <option value="ЗелАО">ЗелАО</option>
+            <option value="ЮЗАО">ЮЗАО</option>
+            <option value="Новомосковский">Новомосковский</option>
+            <option value="Троицкий">Троицкий</option>
+        </select><br>
+        <select style="position: absolute; left: 310px; top: 480px;" type="text" id ="product_type_OwnerOccupier" name="product_type_OwnerOccupier">
+            <option value="" disabled selected>Выберите тип жилья</option>
+            <option value="0">Первичка</option>
+            <option value="1">Вторичка</option>
+        </select><br>
+        <button style="position: absolute; left: 780px; top: 550px;" type="submit"> Предсказать </button>
+    </form>
+    {% for pred in predict %}
+    <div style="position: absolute; left: 310px; top: 650px;">
+        <h3> Ожидаемая стоимость квартиры: {{pred}} млн руб.</h3>
+    </div>
+    {% endfor %}
+    <form action="price">
+        <button style="position: absolute; left: 980px; top: 550px;" type="submit">Очистить</button>
+    </form>
+</div>
+
+{% endblock %}
